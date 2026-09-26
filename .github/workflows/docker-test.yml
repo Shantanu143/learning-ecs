@@ -1,0 +1,23 @@
+name: Docker Build Test
+
+on:
+    push:
+        branches:
+            - main
+            - dev
+
+jobs:
+    docker:
+        runs-on: ubuntu-latest
+
+        steps:
+            - name: Checkout code
+              uses: actions/checkout@v4
+
+            - name: Build Docker image
+              run: |
+                  docker build -t test-service:latest .
+
+            - name: Check Docker image
+              run: |
+                  docker images
